@@ -1,1 +1,1 @@
-print('git')
+print("우렁이")
