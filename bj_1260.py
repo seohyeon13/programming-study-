@@ -39,7 +39,9 @@ def bfs(matrix, start, visited):
 
 visited = [0] * (N+1)
 dfs(matrix, V, visited)
+
 print()
+
 visited = [0] * (N+1)
 bfs(matrix, V, visited)
 
@@ -49,3 +51,4 @@ for i in range(N):
         print(matrix[i][j],end = ' ')
     print(" ")
 '''
+
