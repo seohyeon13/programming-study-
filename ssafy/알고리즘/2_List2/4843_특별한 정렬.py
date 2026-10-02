@@ -14,5 +14,5 @@ for tc in range(1, T+1):
         new_arr.append(min_num)
         arr.pop(arr.index(min_num))
 
-    print(f'#{tc}', *new_arr)
+    print(f'#{tc}', *new_arr[:10])
         

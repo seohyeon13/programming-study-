@@ -5,19 +5,20 @@ for tc in range(1, T+1):
     N = int(input())
 
     arr = [list(map(int, input().split())) for _ in range(N)]
-    cnt = 0
+    answer = 0
 
     for i in range(N):
         for j in range(N):
             cur_x = i
             cur_y = j
+            cnt = 1
 
             while 1:
                 x = cur_x
                 y = cur_y
                 for i in range(4):
-                    nx = x+ dx[i]
-                    ny = y + dy[i]
+                    nx = cur_x+ dx[i]
+                    ny = cur_y + dy[i]
 
                     if nx <0 or ny<0 or nx>=N or ny >= N:
                         continue
