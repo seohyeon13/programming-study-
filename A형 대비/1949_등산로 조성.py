@@ -15,13 +15,13 @@ T = int(input())
 dx = [-1, 1, 0, 0] # 상 하 좌 우
 dy = [0, 0, -1, 1]
 
-def dfs(x, y, path):
+def dfs(x, y, path, k):
     global hiking_path
+    # print([x,y])
     # x, y 는 현재 좌표
     visited[x][y] = 1
 
-    if hiking_path < path:
-        hiking_path = max(path, hiking_path)
+    hiking_path = max(path, hiking_path)
 
     for d in range(4):
         nx = x + dx[d]
@@ -34,14 +34,17 @@ def dfs(x, y, path):
         if visited[nx][ny]:
             continue
 
-        # 2. 값이 크면 이동 x
-        if arr[nx][ny] > arr[x][y]:
-            continue
-        if arr[nx][ny] == arr[x][y]:
-            if K:
-                pass
+        # 2. 현재 높이 > 다음 높이 => 이동
+        if arr[x][y] > arr[nx][ny]:
+            dfs(nx, ny, path+1, k)
 
-        dfs(nx, ny, path+1)
+        elif (arr[nx][ny]-k < arr[x][y]) and k > 0:
+            original_height = arr[nx][ny]
+            arr[nx][ny] = arr[x][y] - 1
+            dfs(nx, ny, path+1, 0)
+            arr[nx][ny] = original_height
+
+    visited[x][y] = 0 
 
 for tc in range(1, T+1):
     N, K = map(int, input().split())
@@ -60,7 +63,9 @@ for tc in range(1, T+1):
     for i in range(N):
         for j in range(N):
             if arr[i][j] == max_val:
-                dfs(i, j, 0)
+                dfs(i, j, 1, K)
+
+    print(f'#{tc} {hiking_path}')
 
 
     
