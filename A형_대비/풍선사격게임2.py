@@ -7,8 +7,10 @@ def dfs(balloons):
         return balloons[0]
     # 2. balloons 길이 여러개라면
     # 현재 해당하는 숫자 조합의 점수가 이미 존재하는지 확인
-    if set(balloons) in memo:
-        return memo[set(balloons)]
+    if tuple(balloons) in memo:
+        return memo[tuple(balloons)]
+
+    max_score = float('-inf')
 
     # 3. 그것도 아니라면, 점수 계산
     for i in range(len(balloons)):
@@ -26,16 +28,15 @@ def dfs(balloons):
 
         max_score = max(max_score, total_score)
 
-    memo[set(balloons)] = max_score
+    memo[tuple(balloons)] = max_score
 
     return max_score
 
 for tc in range(1, T+1):
     N = int(input())
     balloons = list(map(int, input().split()))
-    answer = float('-inf')
     memo = {}
-    dfs(balloons)
+    answer = dfs(balloons)
     print(f'#{tc} {answer}')
 
     '''
