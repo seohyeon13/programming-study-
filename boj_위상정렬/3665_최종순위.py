@@ -70,8 +70,3 @@ for _ in range(T):
         print('?')
     else:
         print(*now)
-    
-
-
-
-    
